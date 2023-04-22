@@ -1,2 +1,1 @@
-# IoT_Project
-Obstacle Avoiding Car
+The aim of this project is to detect an obstacle at a pre-defined distance and divert from this path. The distance is measured using ultrasonic sensor which is mounted on a servo motor. As soon as an object is detected the car comes to a hault and the servo motor turns to right and left side to check if any obstacle exists at those sides, if not then the car continues to travel at either of these directions. The dc motor is attached to back wheels of car which is controlled by H-Bridge. It controls the speed and direction of spin of wheels. Hence to turn car into a specific direction, H-Bridge can be used to control spin direction of wheels and turn the car.
