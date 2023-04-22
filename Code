@@ -1,0 +1,94 @@
+int RMFor= 5;
+int RMBack=4;
+int LMFor = 2;
+int LMBack = 3;
+int tpin=6;
+int epin=7;
+long dur;
+double distanceInch;
+int ena = 8;
+
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(RMFor, OUTPUT);
+  pinMode(RMBack,OUTPUT);
+  pinMode(LMFor, OUTPUT);
+  pinMode(LMBack,OUTPUT);
+  pinMode(tpin,OUTPUT);
+  pinMode(epin,INPUT);
+  pinMode(ena,OUTPUT);
+  Serial.begin(9600);
+}
+
+int count = 0;
+void loop() {
+  // put your main code here, to run repeatedly:
+  if (getDistance()>15)
+  {
+    forward();
+  }
+  else
+  {
+    backward();
+    //delay(500);
+    //left();
+    //right();
+    //
+    //backward();
+  } 
+}
+
+void forward()
+{
+  digitalWrite(RMFor, HIGH);
+  digitalWrite(RMBack, LOW);
+  digitalWrite(LMFor, HIGH);
+  digitalWrite(LMBack, LOW);
+}
+
+double getDistance()
+{
+  digitalWrite(tpin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(tpin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(tpin, LOW);
+  dur = pulseIn(epin, HIGH);
+
+  distanceInch = dur*0.0133/2;
+  return distanceInch;
+}
+
+void right()
+{
+  digitalWrite(ena,300);
+  digitalWrite(RMFor, HIGH);
+  digitalWrite(RMBack, LOW);
+  digitalWrite(LMFor, LOW);
+  digitalWrite(LMBack, HIGH); //HIGH
+}
+
+void left()
+{
+  digitalWrite(RMFor, LOW);
+  digitalWrite(RMBack, HIGH);
+  digitalWrite(LMFor, HIGH);
+  digitalWrite(LMBack, LOW);
+}
+
+void backward()
+{
+  digitalWrite(RMFor, LOW);
+  digitalWrite(RMBack, HIGH);
+  digitalWrite(LMFor, LOW);
+  digitalWrite(LMBack, HIGH);
+}
+
+void stop()
+{
+  digitalWrite(RMFor, LOW);
+  digitalWrite(RMBack, LOW);
+  digitalWrite(LMFor, LOW);
+  digitalWrite(LMBack, LOW);
+}
